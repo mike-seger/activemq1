@@ -1,6 +1,6 @@
 package com.net128.sample.activemq1.controller;
 
-import com.net128.sample.activemq1.model.Message;
+import com.net128.sample.activemq1.db.app.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;

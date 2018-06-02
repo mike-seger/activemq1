@@ -1,8 +1,7 @@
 package com.net128.sample.activemq1.jms;
 
-import com.net128.sample.activemq1.model.Message;
-import com.net128.sample.activemq1.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.net128.sample.activemq1.db.app.model.Message;
+import com.net128.sample.activemq1.db.app.repository.MessageRepository;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 

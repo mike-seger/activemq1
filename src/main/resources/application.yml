@@ -2,10 +2,20 @@ server:
     port: 18190
 spring:
     activemq:
-        broker-url: tcp://localhost:61616
-#        broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
-        in-memory: true
+        broker-name: msgBroker
+        broker-url: "tcp://localhost:61190"
+        #broker-url: "tcp://localhost:61616"
+        # password: admin
+        # user: admin
+        # broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
+        # broker-url: tcp://localhost:61616?jms.redeliveryPolicy.maximumRedeliveries=1
+        # in-memory: true
         non-blocking-redelivery: true
+        locker:
+            # This value must be greater than jdbc:lock-keep-alive-period
+            acquire-sleep-interval: 5000
+        jdbc:
+            lock-keep-alive-period: 1000
         packages:
             trust-all: false
             trusted: com.net128.sample.activemq1
@@ -21,8 +31,6 @@ spring:
             reconnect-on-exception: true
             time-between-expiration-check: -1
             use-anonymous-producers: true
-
-    # Spring JMS Settings
     jms:
         listener:
             acknowledge-mode: auto
@@ -37,35 +45,58 @@ spring:
             qos-enabled: true
             receive-timeout: 1000
             time-to-live: 36000
-#  activemq:
-#        broker-url: tcp://localhost:61616?jms.redeliveryPolicy.maximumRedeliveries=1
-#        password: admin
-#        user: admin
-    datasource:
-        type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:~/h2/activemq1-msg;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-        driver-class-name: org.h2.Driver
-        hikari:
-            minimum-idle: 1
-            maximum-pool-size: 5
-            pool-name: poolname
-            maxLifetime: 2000000
-            idle-timeout: 10000
-            connectionTimeout: 30000
-            pool-prepared-statements: true
-            max-open-prepared-statements: 250
-        username: admin
-        password: admin
     h2:
         console:
             enabled: true
             path: /develop/h2_console
     jpa:
+        database: default
         hibernate:
             ddl-auto: update
         properties:
             hibernate:
                 format_sql: true
         show-sql: false
-hibernate:
-    dialect: org.hibernate.dialect.H2Dialect
+application:
+    db:
+        app:
+            datasource:
+                type: com.zaxxer.hikari.HikariDataSource
+                url: jdbc:h2:~/h2/activemq1-msg;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+                driver-class-name: org.h2.Driver
+                hikari:
+                    minimum-idle: 1
+                    maximum-pool-size: 5
+                    pool-name: poolname
+                    maxLifetime: 2000000
+                    idle-timeout: 10000
+                    connectionTimeout: 30000
+                    pool-prepared-statements: true
+                    max-open-prepared-statements: 250
+                username: admin
+                password: admin
+            jpa:
+                hibernate:
+                    ddl-auto: update
+                properties:
+                    hibernate:
+                        format_sql: true
+                show-sql: false
+        activemq:
+            datasource:
+                type: com.zaxxer.hikari.HikariDataSource
+                url: jdbc:h2:~/h2/activemq1;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+                driver-class-name: org.h2.Driver
+                hikari:
+                    minimum-idle: 1
+                    maximum-pool-size: 5
+                    pool-name: poolname
+                    maxLifetime: 2000000
+                    idle-timeout: 10000
+                    connectionTimeout: 30000
+                    pool-prepared-statements: true
+                    max-open-prepared-statements: 250
+                username: admin
+                password: admin
+#hibernate:
+#    dialect: org.hibernate.dialect.H2Dialect
