@@ -22,3 +22,4 @@ curl -H "Content-Type: application/json" \
 https://dzone.com/articles/using-jms-in-spring-boot-1
 https://liuzy163.wordpress.com/2016/09/26/use-springboot-to-deploy-activemq-broker-to-tomcat-33/comment-page-1/
 https://activemq.apache.org/artemis/docs/1.0.0/ha.html
+http://activemq.apache.org/masterslave.html
