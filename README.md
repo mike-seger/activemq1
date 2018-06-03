@@ -23,6 +23,7 @@ https://liuzy163.wordpress.com/2016/08/04/use-springboot-to-deploy-activemq-brok
 https://liuzy163.wordpress.com/2016/09/26/use-springboot-to-deploy-activemq-broker-to-tomcat-33/
 https://activemq.apache.org/artemis/docs/1.0.0/ha.html
 http://activemq.apache.org/masterslave.html
+http://activemq.apache.org/jdbc-master-slave.html
 https://medium.com/@joeclever/using-multiple-datasources-with-spring-boot-and-spring-data-6430b00c02e7
 http://activemq.apache.org/how-do-i-use-ssl.html
 https://stackoverflow.com/questions/34334629/spring-boot-ssl-tcpclient-stompbrokerrelaymessagehandler-activemq-undertow
@@ -30,4 +31,8 @@ https://www.ivankrizsan.se/2016/08/15/embedded-activemq-with-ssl/
 https://dzone.com/articles/jdbc-master-slave-persistence-setup-with-activemq
 https://github.com/danielpalstra/docker-activemq-mcollective
 https://erikwramner.wordpress.com/2015/09/18/beware-of-activemq-with-jdbc-persistence/
+https://activemq.apache.org/artemis/
+https://store.docker.com/community/images/rmohr/activemq
+https://store.docker.com/community/images/vromero/activemq-artemis
 https://github.com/vromero/activemq-artemis-docker
+https://store.docker.com/community/images/javierprovecho/docker-activemq
