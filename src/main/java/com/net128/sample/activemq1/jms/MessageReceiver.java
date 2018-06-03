@@ -2,12 +2,14 @@ package com.net128.sample.activemq1.jms;
 
 import com.net128.sample.activemq1.db.app.model.Message;
 import com.net128.sample.activemq1.db.app.repository.MessageRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
 @Component
+@Profile("jmslistener")
 public class MessageReceiver {
 
     @Inject

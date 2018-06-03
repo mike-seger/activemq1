@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 
+@Profile("broker")
 @Configuration
 public class ActiveMqConfiguration {
     @Value("${spring.activemq.broker-url}")
@@ -44,7 +46,6 @@ public class ActiveMqConfiguration {
         LeaseDatabaseLocker locker = new LeaseDatabaseLocker();
         locker.setDataSource(activeMqDataSource);
         locker.setLeaseHolderId(activeMqBrokerName);
-        //This value must be greater than the LockKeepAlivePeriod
         locker.setLockAcquireSleepInterval(lockAcquireSleepInterval);
         jdbcPersistenceAdapter.setLocker(locker);
         jdbcPersistenceAdapter.setLockKeepAlivePeriod(jdbcLockKeepAlivePeriod);

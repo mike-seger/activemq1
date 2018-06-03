@@ -1,15 +1,11 @@
 server:
     port: 18190
 spring:
+    profiles:
+        active: broker,jmslistener
     activemq:
         broker-name: msgBroker
         broker-url: "tcp://localhost:61190"
-        #broker-url: "tcp://localhost:61616"
-        # password: admin
-        # user: admin
-        # broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
-        # broker-url: tcp://localhost:61616?jms.redeliveryPolicy.maximumRedeliveries=1
-        # in-memory: true
         non-blocking-redelivery: true
         locker:
             # This value must be greater than jdbc:lock-keep-alive-period
@@ -57,12 +53,14 @@ spring:
             hibernate:
                 format_sql: true
         show-sql: false
+hibernate:
+    dialect: org.hibernate.dialect.H2Dialect
 application:
     db:
         app:
             datasource:
                 type: com.zaxxer.hikari.HikariDataSource
-                url: jdbc:h2:~/h2/activemq1-msg;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+                url: jdbc:h2:~/h2/activemq1-msg;USER=admin;PASSWORD=admin;MODE=Oracle;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
                 driver-class-name: org.h2.Driver
                 hikari:
                     minimum-idle: 1
@@ -85,7 +83,7 @@ application:
         activemq:
             datasource:
                 type: com.zaxxer.hikari.HikariDataSource
-                url: jdbc:h2:~/h2/activemq1;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+                url: jdbc:h2:~/h2/activemq1;USER=admin;PASSWORD=admin;MODE=Oracle;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
                 driver-class-name: org.h2.Driver
                 hikari:
                     minimum-idle: 1
@@ -98,5 +96,28 @@ application:
                     max-open-prepared-statements: 250
                 username: admin
                 password: admin
-#hibernate:
-#    dialect: org.hibernate.dialect.H2Dialect
+logging:
+    level:
+        com:
+            netflix: warn
+            netflix.config.sources.URLConfigurationSource: error
+            net128.sample.activemq1: warn
+            net128.sample.activemq1.config:
+                PropertiesDumper: debug
+            zaxxer.hikari.HikariDataSource: warn
+        org:
+            apache:
+                catalina: warn
+                #activemq: warn
+            hibernate: warn
+            hibernate.type.descriptor.sql: warn
+            springframework: warn
+            springframework.jmx.export.annotation.AnnotationMBeanExporter: error
+            springframework.beans.factory.support.DisposableBeanAdapter: error
+            springframework.boot:
+                context.embedded.tomcat.TomcatEmbeddedServletContainer: info
+                web.embedded.undertow: info
+                web.embedded.tomcat: info
+                web.embedded.jetty: info
+            reflections: warn
+        springfox: warn

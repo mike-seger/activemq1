@@ -1,8 +1,9 @@
 package com.net128.sample.activemq1.db.app;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -24,18 +25,28 @@ import java.util.Map;
 @EnableJpaRepositories(
     entityManagerFactoryRef = "appEntityManagerFactory",
     transactionManagerRef = "appTransactionManager",
-    basePackages = {"com.net128.sample.activemq1.db.app.repository"}
+    basePackageClasses = { AppDbConfig.class }
 )
 public class AppDbConfig {
+
+    @Value("${hibernate.dialect}")
+    private String hibernateDialect;
 
     @Value("${application.db.app.jpa.hibernate.ddl-auto}")
     private String ddlAuto;
 
     @Primary
+    @Bean
+    @ConfigurationProperties("application.db.app.datasource")
+    public DataSourceProperties appDataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Primary
     @Bean(name = "appDataSource")
-    @ConfigurationProperties(prefix = "application.db.app.datasource")
-    public DataSource appDataSource() {
-        return DataSourceBuilder.create().build();
+    @ConfigurationProperties("application.db.app.datasource")
+    public HikariDataSource appDataSource(DataSourceProperties properties) {
+        return properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
     @Primary
@@ -44,11 +55,12 @@ public class AppDbConfig {
         EntityManagerFactoryBuilder builder,
         @Qualifier("appDataSource") DataSource appDataSource
     ) {
-        Map<String, Object> properties = new HashMap<String, Object>();
+        Map<String, Object> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", ddlAuto);
+        properties.put("hibernate.dialect", hibernateDialect);
         return builder
             .dataSource(appDataSource)
-            .packages("com.net128.sample.activemq1.db.app.model")
+            .packages(getClass().getPackage().getName())
             .persistenceUnit("app")
             .properties(properties)
             .build();

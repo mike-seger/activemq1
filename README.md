@@ -7,9 +7,7 @@
 
 ## H2
 [H2 Console](http://localhost:18190/develop/h2_console/)
-url=jdbc:h2:~/h2/activemq1-msg  
-user admin  
-password admin  
+url=jdbc:h2:tcp://localhost:18290/~/h2/activemq1-msg;USER=admin;PASSWORD=admin  
 
 ## Curl examples
 ```

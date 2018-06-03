@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Initial configuration for logback, which suupresses output from devtools -->
+    <!-- Logging configuration is expected to be done via logging.xxx config values -->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <root level="OFF">
+    </root>
+</configuration>

@@ -35,3 +35,4 @@ nbdist/
 !/config/application.properties
 
 /activemq-data/
+/docker/var

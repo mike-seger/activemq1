@@ -3,6 +3,7 @@ package com.net128.sample.activemq1.jms;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
@@ -14,6 +15,7 @@ import javax.jms.ConnectionFactory;
 
 @EnableJms
 @Configuration
+@Profile("jmslistener")
 public class JmsConfiguration {
     @Bean
     public JmsListenerContainerFactory<?> myFactory(

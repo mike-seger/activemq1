@@ -1,0 +1,16 @@
+application:
+    db:
+        app:
+            datasource:
+                url: jdbc:postgresql://appDb:5432/appDb
+                driver-class-name: org.postgresql.Driver
+                username: admin
+                password: admin
+        activemq:
+            datasource:
+                url: jdbc:postgresql://activeMqDb:5432/activeMqDb
+                driver-class-name: org.postgresql.Driver
+                username: admin
+                password: admin
+hibernate:
+    dialect: org.hibernate.dialect.PostgreSQLDialect

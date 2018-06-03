@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+  appDb:
+    image: postgres:9.6.9
+    ports:
+     - "65432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=appDb
+    volumes:
+      - ./var/postgres/appdb:/var/lib/postgresql/data/
+  activeMqDb:
+    image: postgres:9.6.9
+    ports:
+     - "65433:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=activeMqDb
+    volumes:
+      - ./var/postgres/amqdb:/var/lib/postgresql/data/
+  activemq1:
+      build:
+          context: ../
+          dockerfile: docker/activemq1-Dockerfile
+      ports:
+          - "18190"
+      environment:
+          - spring.profiles.active=cluster1,broker,jmslistener
+
+
+
+
+

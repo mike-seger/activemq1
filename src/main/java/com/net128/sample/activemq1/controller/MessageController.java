@@ -2,11 +2,13 @@ package com.net128.sample.activemq1.controller;
 
 import com.net128.sample.activemq1.db.app.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/message")
+@Profile("broker")
 public class MessageController {
 
     @Autowired
