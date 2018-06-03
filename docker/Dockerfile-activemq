@@ -1,0 +1,4 @@
+FROM rmohr/activemq:5.14.3-alpine
+
+ADD var/lib/postgresql*.jar /opt/$ACTIVEMQ/lib/optional/
+ADD etc/activemq/activemq.xml /opt/$ACTIVEMQ/conf/

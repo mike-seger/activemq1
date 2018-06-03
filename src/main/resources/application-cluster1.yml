@@ -1,20 +1,22 @@
 spring:
     activemq:
-        broker-name: msgBroker
-        broker-url: "tcp://activemq-broker1:61190"
+        #broker-name: msgBroker
+        broker-url: "failover:(tcp://activemq-broker1:61616,tcp://activemq-broker2:61616)"
 application:
     db:
         app:
             datasource:
-                url: jdbc:postgresql://appDb:5432/appDb
+                url: jdbc:postgresql://appdb:5432/appDb
                 driver-class-name: org.postgresql.Driver
                 username: admin
                 password: admin
         activemq:
             datasource:
-                url: jdbc:postgresql://activeMqDb:5432/activeMqDb
+                url: jdbc:postgresql://activemqdb:5432/activemqdb
                 driver-class-name: org.postgresql.Driver
                 username: admin
                 password: admin
 hibernate:
     dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+    level: debug

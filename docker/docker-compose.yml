@@ -1,7 +1,7 @@
 version: '3.6'
 
 services:
-  appDb:
+  appdb:
     image: postgres:9.6.9
     ports:
      - "65432:5432"
@@ -11,28 +11,58 @@ services:
       - POSTGRES_DB=appDb
     volumes:
       - ./var/postgres/appdb:/var/lib/postgresql/data/
-  activeMqDb:
+  activemqdb:
     image: postgres:9.6.9
     ports:
      - "65433:5432"
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=activeMqDb
+      - POSTGRES_DB=activemqdb
     volumes:
       - ./var/postgres/amqdb:/var/lib/postgresql/data/
+  activemq1-client1:
+    image: ms/activemq1
+    build:
+        context: ../
+        dockerfile: docker/Dockerfile-app
+    ports:
+        - 18190:18190
+  activemq1-client2:
+    image: ms/activemq1
+    build:
+        context: ../
+        dockerfile: docker/Dockerfile-app
+    ports:
+        - 18191:18190
   activemq-broker1:
-      build:
-          context: ../
-          dockerfile: docker/activemq1-Dockerfile
-      ports:
-          - "18190"
+    image: activemq-broker
+    build:
+        context: ./
+        dockerfile: Dockerfile-activemq
+    depends_on:
+          - activemqdb
+    ports:
+      - 61616:61616 # JMS
+      - 8161:8161   # UI
+      - 5672        # AMQP
+      - 61613:61613 # STOMP
+      - 6883:1883   # MQTT
+      - 61614:61614 # WS
   activemq-broker2:
-      build:
-          context: ../
-          dockerfile: docker/activemq1-Dockerfile
-      ports:
-          - "18191"
+    image: activemq-broker
+    build:
+        context: ./
+        dockerfile: Dockerfile-activemq
+    depends_on:
+          - activemqdb
+    ports:
+      - 62616:61616 # JMS
+      - 8261:8161   # UI
+      - 6672:5672   # AMQP
+      - 62613:61613 # STOMP
+      - 7883:1883   # MQTT
+      - 62614:61614 # WS
 
 
 

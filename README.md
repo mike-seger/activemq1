@@ -28,3 +28,6 @@ http://activemq.apache.org/how-do-i-use-ssl.html
 https://stackoverflow.com/questions/34334629/spring-boot-ssl-tcpclient-stompbrokerrelaymessagehandler-activemq-undertow
 https://www.ivankrizsan.se/2016/08/15/embedded-activemq-with-ssl/
 https://dzone.com/articles/jdbc-master-slave-persistence-setup-with-activemq
+https://github.com/danielpalstra/docker-activemq-mcollective
+https://erikwramner.wordpress.com/2015/09/18/beware-of-activemq-with-jdbc-persistence/
+https://github.com/vromero/activemq-artemis-docker
