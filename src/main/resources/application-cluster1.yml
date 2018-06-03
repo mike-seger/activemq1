@@ -1,3 +1,7 @@
+spring:
+    activemq:
+        broker-name: msgBroker
+        broker-url: "tcp://activemq-broker1:61190"
 application:
     db:
         app:
