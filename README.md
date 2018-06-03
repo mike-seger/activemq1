@@ -38,3 +38,4 @@ https://github.com/vromero/activemq-artemis-docker
 https://store.docker.com/community/images/javierprovecho/docker-activemq
 http://queues.io/
 https://www.predic8.de/activemq-hornetq-rabbitmq-apollo-qpid-vergleich.htm
+http://hiramchirino.com/blog/2011/12/stomp-messaging-benchmarks-activemq-vs-apollo-vs-hornetq-vs-rabbitmq/
