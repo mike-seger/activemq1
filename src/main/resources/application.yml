@@ -6,6 +6,8 @@ spring:
     activemq:
         broker-name: msgBroker
         broker-url: "tcp://localhost:61190"
+        stomp-url: "stomp://localhost:61613"
+        stomp-ssl-url: "stomp+ssl://localhost:64613"
         non-blocking-redelivery: true
         locker:
             # This value must be greater than jdbc:lock-keep-alive-period
